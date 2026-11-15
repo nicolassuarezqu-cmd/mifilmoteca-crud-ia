@@ -1,0 +1,564 @@
+/* ============================================================
+   MIFILMOTECA - Hoja de estilos
+   Tema oscuro estilo plataforma de streaming
+   ============================================================ */
+
+/* ----- RESET Y CONFIGURACIÓN BASE ----- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --negro-profundo: #141414;
+    --negro-medio: #1a1a1a;
+    --negro-claro: #222222;
+    --gris-oscuro: #2a2a2a;
+    --gris-medio: #555555;
+    --gris-claro: #b3b3b3;
+    --blanco: #ffffff;
+    --rojo: #e50914;
+    --rojo-oscuro: #b20710;
+    --rojo-claro: #ff6b6b;
+    --verde: #2ecc71;
+    --verde-oscuro: #27ae60;
+    --azul: #3498db;
+    --azul-oscuro: #2980b9;
+    --amarillo: #f1c40f;
+
+    --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radio-borde: 8px;
+    --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --sombra-media: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--negro-profundo);
+    color: var(--blanco);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ----- ENCABEZADO ----- */
+.encabezado {
+    background: linear-gradient(180deg, var(--negro-claro) 0%, var(--negro-profundo) 100%);
+    border-bottom: 2px solid var(--rojo);
+    padding: 1.5rem 2rem;
+    text-align: center;
+}
+
+.encabezado__titulo {
+    font-size: 2rem;
+    color: var(--rojo);
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+}
+
+.encabezado__subtitulo {
+    font-size: 0.95rem;
+    color: var(--gris-claro);
+}
+
+/* ----- CONTENEDOR PRINCIPAL (dos columnas) ----- */
+.contenedor {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* ----- PANELES ----- */
+.panel {
+    background-color: var(--negro-medio);
+    border-radius: var(--radio-borde);
+    padding: 1.5rem;
+    box-shadow: var(--sombra-suave);
+}
+
+.panel__titulo {
+    font-size: 1.3rem;
+    color: var(--blanco);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--gris-oscuro);
+}
+
+/* ============================================================
+   FORMULARIO
+   ============================================================ */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formulario__grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.formulario__etiqueta {
+    font-size: 0.85rem;
+    color: var(--gris-claro);
+    font-weight: 600;
+}
+
+.formulario__obligatorio {
+    color: var(--rojo);
+}
+
+.formulario__campo {
+    padding: 0.65rem 0.75rem;
+    background-color: var(--negro-claro);
+    border: 1px solid var(--gris-oscuro);
+    border-radius: 4px;
+    color: var(--blanco);
+    font-family: var(--fuente-principal);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+.formulario__campo:focus {
+    outline: none;
+    border-color: var(--rojo);
+    box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+}
+
+.formulario__campo::placeholder {
+    color: var(--gris-medio);
+}
+
+.formulario__textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Select personalizado básico */
+select.formulario__campo {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b3b3b3' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2rem;
+}
+
+select.formulario__campo option {
+    background-color: var(--negro-claro);
+    color: var(--blanco);
+}
+
+/* ----- SELECTOR DE ESTRELLAS ----- */
+.formulario__estrellas {
+    display: flex;
+    gap: 4px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.formulario__estrella {
+    color: var(--gris-oscuro);
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.formulario__estrella--activa {
+    color: var(--amarillo);
+    text-shadow: 0 0 6px rgba(241, 196, 15, 0.4);
+}
+
+.formulario__estrella:hover {
+    transform: scale(1.2);
+}
+
+/* ----- MENSAJE DE ERROR ----- */
+.formulario__error {
+    background-color: rgba(229, 9, 20, 0.15);
+    border: 1px solid var(--rojo);
+    border-radius: 4px;
+    padding: 0.6rem 0.75rem;
+    color: var(--rojo-claro);
+    font-size: 0.85rem;
+}
+
+.formulario__error.oculto {
+    display: none;
+}
+
+/* ----- BOTONES DEL FORMULARIO ----- */
+.formulario__botones {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* ============================================================
+   BOTONES (estilos base)
+   ============================================================ */
+
+.boton {
+    padding: 0.65rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--fuente-principal);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.boton:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--sombra-suave);
+}
+
+.boton:active {
+    transform: translateY(0);
+}
+
+.boton--primario {
+    background-color: var(--rojo);
+    color: var(--blanco);
+}
+
+.boton--primario:hover {
+    background-color: var(--rojo-oscuro);
+}
+
+.boton--cancelar {
+    background-color: var(--gris-oscuro);
+    color: var(--gris-claro);
+}
+
+.boton--cancelar:hover {
+    background-color: #3a3a3a;
+    color: var(--blanco);
+}
+
+.boton--editar {
+    background-color: var(--azul);
+    color: var(--blanco);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.boton--editar:hover {
+    background-color: var(--azul-oscuro);
+}
+
+.boton--eliminar {
+    background-color: transparent;
+    color: var(--rojo-claro);
+    border: 1px solid var(--rojo-claro);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.boton--eliminar:hover {
+    background-color: rgba(229, 9, 20, 0.15);
+}
+
+/* Utilidad para ocultar elementos */
+.oculto {
+    display: none !important;
+}
+
+/* ============================================================
+   HERRAMIENTAS (buscador, filtros, contador)
+   ============================================================ */
+
+.herramientas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    align-items: center;
+}
+
+.herramientas__busqueda {
+    flex: 1 1 200px;
+}
+
+.herramientas__campo {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    background-color: var(--negro-claro);
+    border: 1px solid var(--gris-oscuro);
+    border-radius: 4px;
+    color: var(--blanco);
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease;
+}
+
+.herramientas__campo:focus {
+    outline: none;
+    border-color: var(--rojo);
+}
+
+.herramientas__filtros {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.herramientas__select {
+    padding: 0.55rem 0.75rem;
+    background-color: var(--negro-claro);
+    border: 1px solid var(--gris-oscuro);
+    border-radius: 4px;
+    color: var(--blanco);
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' width='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23b3b3b3' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    padding-right: 1.75rem;
+}
+
+.herramientas__select option {
+    background-color: var(--negro-claro);
+    color: var(--blanco);
+}
+
+.herramientas__contador {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(229, 9, 20, 0.1);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--gris-claro);
+    white-space: nowrap;
+}
+
+.herramientas__contador strong {
+    color: var(--blanco);
+}
+
+.herramientas__contador-separador {
+    color: var(--gris-oscuro);
+}
+
+/* ============================================================
+   LISTA DE TÍTULOS (tarjetas)
+   ============================================================ */
+
+.lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+/* ----- TARJETA INDIVIDUAL ----- */
+.tarjeta {
+    background-color: var(--negro-claro);
+    border-radius: var(--radio-borde);
+    padding: 1.25rem;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.tarjeta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta__titulo {
+    font-size: 1.1rem;
+    color: var(--blanco);
+    font-weight: 700;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.tarjeta__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+/* Etiquetas (badges) para tipo, estado, etc. */
+.etiqueta {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.etiqueta--pelicula {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: var(--azul);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.etiqueta--serie {
+    background-color: rgba(155, 89, 182, 0.2);
+    color: #9b59b6;
+    border: 1px solid rgba(155, 89, 182, 0.3);
+}
+
+.etiqueta--pendiente {
+    background-color: rgba(241, 196, 15, 0.15);
+    color: var(--amarillo);
+    border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+.etiqueta--viendo {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: var(--verde);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.etiqueta--vista {
+    background-color: rgba(52, 152, 219, 0.15);
+    color: var(--azul);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.tarjeta__info {
+    font-size: 0.8rem;
+    color: var(--gris-claro);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+}
+
+.tarjeta__info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.tarjeta__estrellas {
+    color: var(--amarillo);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.tarjeta__estrellas--vacia {
+    color: var(--gris-medio);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.tarjeta__notas {
+    font-size: 0.82rem;
+    color: var(--gris-medio);
+    font-style: italic;
+    border-left: 2px solid var(--gris-oscuro);
+    padding-left: 0.6rem;
+    word-break: break-word;
+}
+
+.tarjeta__acciones {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+/* ----- MENSAJE DE LISTA VACÍA ----- */
+.lista__vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--gris-medio);
+}
+
+.lista__vacio-icono {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.lista__vacio-texto {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gris-claro);
+    margin-bottom: 0.4rem;
+}
+
+.lista__vacio-sugerencia {
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   RESPONSIVE: Adaptación a pantallas pequeñas
+   ============================================================ */
+
+@media (max-width: 900px) {
+    .contenedor {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.25rem;
+    }
+
+    .encabezado {
+        padding: 1rem;
+    }
+
+    .encabezado__titulo {
+        font-size: 1.5rem;
+    }
+
+    .herramientas {
+        flex-direction: column;
+    }
+
+    .herramientas__filtros {
+        width: 100%;
+    }
+
+    .herramientas__select {
+        flex: 1;
+    }
+
+    .herramientas__contador {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lista {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario__botones {
+        flex-direction: column;
+    }
+
+    .formulario__botones .boton {
+        width: 100%;
+    }
+
+    .tarjeta__acciones {
+        flex-direction: column;
+    }
+
+    .tarjeta__acciones .boton {
+        width: 100%;
+        text-align: center;
+    }
+}

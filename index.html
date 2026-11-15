@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiFilmoteca - Gestor de Películas y Series</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== ENCABEZADO ===== -->
+    <header class="encabezado">
+        <h1 class="encabezado__titulo">🎬 MiFilmoteca</h1>
+        <p class="encabezado__subtitulo">Organiza tus películas y series favoritas</p>
+    </header>
+
+    <!-- ===== CONTENEDOR PRINCIPAL ===== -->
+    <main class="contenedor">
+
+        <!-- Sección izquierda: formulario -->
+        <section class="panel panel--formulario">
+            <h2 class="panel__titulo" id="tituloFormulario">Agregar nuevo título</h2>
+
+            <form id="formularioTitulo" class="formulario" novalidate>
+                <input type="hidden" id="campoId">
+
+                <!-- Título -->
+                <div class="formulario__grupo">
+                    <label for="campoTitulo" class="formulario__etiqueta">Título <span class="formulario__obligatorio">*</span></label>
+                    <input type="text" id="campoTitulo" class="formulario__campo" placeholder="Ej: Breaking Bad" required>
+                </div>
+
+                <!-- Tipo -->
+                <div class="formulario__grupo">
+                    <label for="campoTipo" class="formulario__etiqueta">Tipo</label>
+                    <select id="campoTipo" class="formulario__campo">
+                        <option value="película">Película</option>
+                        <option value="serie">Serie</option>
+                    </select>
+                </div>
+
+                <!-- Género -->
+                <div class="formulario__grupo">
+                    <label for="campoGenero" class="formulario__etiqueta">Género</label>
+                    <select id="campoGenero" class="formulario__campo">
+                        <option value="">Seleccionar género...</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Animación">Animación</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Ciencia ficción">Ciencia ficción</option>
+                        <option value="Comedia">Comedia</option>
+                        <option value="Crimen">Crimen</option>
+                        <option value="Documental">Documental</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Fantasía">Fantasía</option>
+                        <option value="Musical">Musical</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Suspenso">Suspenso</option>
+                        <option value="Terror">Terror</option>
+                    </select>
+                </div>
+
+                <!-- Año -->
+                <div class="formulario__grupo">
+                    <label for="campoAnio" class="formulario__etiqueta">Año <span class="formulario__obligatorio">*</span></label>
+                    <input type="number" id="campoAnio" class="formulario__campo" placeholder="Ej: 2024" min="1888">
+                </div>
+
+                <!-- Plataforma -->
+                <div class="formulario__grupo">
+                    <label for="campoPlataforma" class="formulario__etiqueta">Plataforma</label>
+                    <select id="campoPlataforma" class="formulario__campo">
+                        <option value="">Seleccionar plataforma...</option>
+                        <option value="Netflix">Netflix</option>
+                        <option value="Max">Max</option>
+                        <option value="Disney+">Disney+</option>
+                        <option value="Prime Video">Prime Video</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                </div>
+
+                <!-- Estado -->
+                <div class="formulario__grupo">
+                    <label for="campoEstado" class="formulario__etiqueta">Estado</label>
+                    <select id="campoEstado" class="formulario__campo">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="viendo">Viendo</option>
+                        <option value="vista">Vista</option>
+                    </select>
+                </div>
+
+                <!-- Calificación -->
+                <div class="formulario__grupo">
+                    <label for="campoCalificacion" class="formulario__etiqueta">Calificación</label>
+                    <div class="formulario__estrellas" id="selectorEstrellas">
+                        <span class="formulario__estrella" data-valor="1">☆</span>
+                        <span class="formulario__estrella" data-valor="2">☆</span>
+                        <span class="formulario__estrella" data-valor="3">☆</span>
+                        <span class="formulario__estrella" data-valor="4">☆</span>
+                        <span class="formulario__estrella" data-valor="5">☆</span>
+                    </div>
+                    <input type="hidden" id="campoCalificacion" value="0">
+                </div>
+
+                <!-- Notas -->
+                <div class="formulario__grupo">
+                    <label for="campoNotas" class="formulario__etiqueta">Notas</label>
+                    <textarea id="campoNotas" class="formulario__campo formulario__textarea" rows="3" placeholder="Notas personales (opcional)"></textarea>
+                </div>
+
+                <!-- Mensajes de error -->
+                <div id="mensajeError" class="formulario__error oculto"></div>
+
+                <!-- Botones del formulario -->
+                <div class="formulario__botones">
+                    <button type="submit" id="btnGuardar" class="boton boton--primario">Guardar</button>
+                    <button type="button" id="btnCancelar" class="boton boton--cancelar oculto">Cancelar</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Sección derecha: lista -->
+        <section class="panel panel--lista">
+            <!-- Barra de herramientas: buscador, filtros y contador -->
+            <div class="herramientas">
+                <div class="herramientas__busqueda">
+                    <input type="text" id="campoBusqueda" class="herramientas__campo" placeholder="🔍 Buscar por título...">
+                </div>
+                <div class="herramientas__filtros">
+                    <select id="filtroTipo" class="herramientas__select">
+                        <option value="todos">Todos los tipos</option>
+                        <option value="película">Películas</option>
+                        <option value="serie">Series</option>
+                    </select>
+                    <select id="filtroEstado" class="herramientas__select">
+                        <option value="todos">Todos los estados</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="viendo">Viendo</option>
+                        <option value="vista">Vista</option>
+                    </select>
+                </div>
+                <!-- Contador -->
+                <div class="herramientas__contador" id="contador">
+                    <span class="herramientas__contador-texto">Total: <strong id="contadorTotal">0</strong></span>
+                    <span class="herramientas__contador-separador">|</span>
+                    <span class="herramientas__contador-texto">Vistas: <strong id="contadorVistas">0</strong></span>
+                </div>
+            </div>
+
+            <!-- Zona donde se renderiza la lista de títulos -->
+            <div id="listaTitulos" class="lista">
+                <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+            </div>
+
+            <!-- Mensaje cuando no hay registros -->
+            <div id="mensajeVacio" class="lista__vacio">
+                <div class="lista__vacio-icono">📺</div>
+                <p class="lista__vacio-texto">Tu filmoteca está vacía</p>
+                <p class="lista__vacio-sugerencia">Agrega tu primera película o serie usando el formulario</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
