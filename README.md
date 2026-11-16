@@ -1,7 +1,7 @@
 ## Prompts utilizados
 
 ### Prompt 1: Aplicación completa (base)
-**Herramienta:** [escribe aquí cuál usaste: Claude Code / Cursor / Copilot...]
+**Herramienta:** [Omniroute y Github Copilot]
 
 **Qué pedí:** Un CRUD completo de películas y series con HTML, CSS y JavaScript
 puro, persistencia en localStorage, validaciones sin `alert()`, buscador,
@@ -15,6 +15,48 @@ de una sola vez, para después mejorarla con prompts de ajuste.
 
 <details>
 <summary>Ver prompt completo</summary>
+### Prompt 2: Corrección del contador
+**Herramienta:** GitHub Copilot
+
+**Qué pedí:** Revisar `actualizarContador` en `app.js` porque "Total" mostraba
+los títulos filtrados y "Vistas" contaba todos los guardados. Pedí que Total
+muestre siempre todos los títulos guardados y Vistas solo los de estado "vista".
+
+**Para qué:** Corregir una inconsistencia que detecté al probar la app con
+filtros: el total bajaba pero las vistas no.
+
+**Resultado:** Copilot hizo que Total use la lista completa y simplificó la
+función para que reciba solo esa lista (+3 / -4 líneas). Verificó la sintaxis
+con `node --check`. Probé yo mismo los filtros y el contador quedó coherente.
+
+### Prompt 3: Corrección de error en el CSS
+**Herramienta:** GitHub Copilot
+
+**Qué pedí:** Revisar `style.css` buscando atributos repetidos. Sospechaba que
+en `.herramientas__select`, dentro del SVG de la flechita, había un `width`
+repetido en lugar de `height`.
+
+**Para qué:** Corregir un error de sintaxis que detecté leyendo el código
+generado y comprobar que no hubiera otros parecidos.
+
+**Resultado:** Copilot cambió el segundo `width='10'` por `height='10'`, revisó
+el otro SVG del archivo y confirmó que no había más errores similares.
+
+### Prompt 4: Refactorización de app.js
+**Herramienta:** GitHub Copilot
+
+**Qué pedí:** Reemplazar todos los `var` por `const` o `let` y cambiar las
+`function(t) {...}` usadas en `find`, `filter`, `map` y `some` por funciones
+flecha, sin cambiar el comportamiento de la app.
+
+**Para qué:** Modernizar y unificar el estilo del código para que sea más
+legible y fácil de explicar.
+
+**Resultado:** Copilot reemplazó 16 declaraciones `var` (por `const` y `let`
+según el caso) y convirtió 8 callbacks a funciones flecha, incluyendo
+`findIndex` por coherencia con `find`. Dejó intactos los eventos y `forEach`.
+Verificó con `node --check` y probó crear, editar y eliminar. Yo repetí el
+CRUD completo y funciona igual.
 
 ```
 Actúa como desarrollador web senior y mentor. Necesito una aplicación web CRUD
